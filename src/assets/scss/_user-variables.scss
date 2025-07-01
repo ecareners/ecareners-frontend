@@ -1,0 +1,116 @@
+// Should you need to add your custom variable or you need to override our theme variables from _variables.SCSS, then we highly recommend that you add the code into this file so that whenever theme update is available and you update the theme, You will not lose your hard work :)
+
+// Below given example is for how to overrides core variables. Uncomment the code, after compilation, You will see the color scheme changes on frontend.
+
+// User Variables
+// FIKES Unsoed Color Palette
+// Primary Blue (from logo): #2A73B6 - Use for headers, primary buttons, key information
+// Accent Teal/Green (from logo): #00A896 - Use for calls-to-action (CTAs), highlights, progress indicators, icons
+// Light Blue/Sky Blue: #E0F2F7 - For backgrounds, subtle sections, hover states
+// Cool Gray: #6C757D - For body text, secondary information, borders
+// Off-White/Pure White: #FFFFFF or #F8F9FA - For backgrounds, content areas
+
+// === Custom Theme Colors ===
+$primary: #2A73B6; // Primary Blue
+$secondary: #00A896; // Accent Teal/Green
+$light-blue: #E0F2F7; // Light Blue/Sky Blue
+$cool-gray: #6C757D; // Cool Gray
+$off-white: #F8F9FA; // Off-White
+
+// Theme colors map
+$theme-colors: map-merge(
+  (
+    "primary": $primary,
+    "secondary": $secondary,
+    "light-blue": $light-blue,
+    "cool-gray": $cool-gray,
+    "off-white": $off-white,
+    "success": $secondary,
+    "info": $light-blue,
+    "warning": #ffc107,
+    "danger": #dc3545,
+    "light": $off-white,
+    "dark": $cool-gray
+  ),
+  $theme-colors
+);
+
+// Set link and navbar colors to use the new primary
+$link-color: $primary;
+$link-hover-color: shift-color($primary, 20%);
+$link-color-dark: $primary;
+$link-hover-color-dark: shift-color($primary, 20%);
+
+$navbar-light-hover-color: $primary;
+$navbar-light-active-color: $primary;
+$navbar-dark-hover-color: $primary !important;
+$navbar-dark-active-color: $primary !important;
+
+$dropdown-link-hover-color: $primary !important;
+$dropdown-link-hover-bg: rgba($primary, .1) !important;
+$dropdown-link-active-bg: $dropdown-link-hover-bg;
+$dropdown-link-active-color: $primary;
+$dropdown-dark-link-hover-bg: $dropdown-link-hover-bg;
+$dropdown-dark-link-active-color: $dropdown-link-active-color;
+$dropdown-dark-link-active-bg: $dropdown-link-active-bg;
+
+$progress-bar-bg: $primary;
+$component-active-bg: $primary;
+
+// Body text color
+$body-color: $cool-gray;
+
+// Background colors
+$body-bg: #ffffff;
+$light-bg: $off-white;
+
+// Border colors
+$border-color: rgba($cool-gray, 0.2);
+
+// Button colors
+$btn-primary-bg: $primary;
+$btn-primary-border: $primary;
+$btn-secondary-bg: $secondary;
+$btn-secondary-border: $secondary;
+
+// Card colors
+$card-bg: #ffffff;
+$card-border-color: rgba($cool-gray, 0.1);
+
+// Form colors
+$input-border-color: rgba($cool-gray, 0.3);
+$input-focus-border-color: $primary;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+
+// Table colors
+$table-border-color: rgba($cool-gray, 0.1);
+$table-striped-bg: rgba($light-blue, 0.1);
+
+// Pagination colors
+$pagination-hover-color: #ffffff;
+$pagination-hover-bg: $primary;
+$pagination-hover-border-color: $primary;
+$pagination-active-color: #ffffff;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
+
+// List group colors
+$list-group-active-color: #ffffff;
+$list-group-active-bg: $primary;
+$list-group-active-border-color: $primary;
+
+// Nav pills colors
+$nav-pills-link-active-color: #ffffff;
+$nav-pills-link-active-bg: $primary;
+
+// Form check colors
+$form-check-input-checked-bg-color: $primary;
+$form-check-input-checked-border-color: $primary;
+$form-check-input-focus-border: $primary;
+$form-check-input-focus-box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+
+// Accordion colors
+$accordion-button-active-bg: rgba($primary, 0.1);
+$accordion-button-active-color: $primary;
+$accordion-icon-color: $cool-gray;
+$accordion-icon-active-color: $primary;

@@ -1,0 +1,390 @@
+// FIKES Custom Styles
+
+// FIKES Layout
+.fikes-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.fikes-main {
+  flex: 1;
+}
+
+// FIKES Header Styles
+.fikes-header {
+  .fikes-topbar {
+    font-size: 0.875rem;
+    
+    .btn-link {
+      text-decoration: none;
+      font-size: 0.875rem;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  .navbar {
+    padding: 1rem 0;
+    
+    .fikes-logo {
+      .logo-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 1.25rem;
+      }
+    }
+    
+    .navbar-brand {
+      text-decoration: none;
+      
+      h5 {
+        font-size: 1.1rem;
+        line-height: 1.2;
+      }
+      
+      small {
+        font-size: 0.875rem;
+      }
+    }
+    
+    .nav-link {
+      color: $cool-gray !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      
+      &:hover {
+        color: $primary !important;
+      }
+    }
+    
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      border-radius: 0.375rem;
+      
+      .dropdown-item {
+        color: $cool-gray;
+        padding: 0.5rem 1rem;
+        
+        &:hover {
+          background-color: rgba($primary, 0.1);
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+// FIKES Footer Styles
+.fikes-footer {
+  margin-top: auto;
+  
+  .contact-info {
+    p {
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+    }
+  }
+  
+  h5, h6 {
+    font-weight: 600;
+  }
+  
+  ul li a {
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: $secondary !important;
+    }
+  }
+  
+  .social-links a {
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// FIKES Content Styles
+.fikes-content {
+  .section-title {
+    color: $primary;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .section-subtitle {
+    color: $cool-gray;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+// FIKES Card Styles
+.fikes-card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-header {
+    background-color: $light-blue;
+    border-bottom: 1px solid rgba($cool-gray, 0.1);
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+// FIKES Button Styles
+.btn-fikes-primary {
+  background-color: $primary;
+  border-color: $primary;
+  color: white;
+  
+  &:hover {
+    background-color: darken($primary, 10%);
+    border-color: darken($primary, 10%);
+  }
+}
+
+.btn-fikes-secondary {
+  background-color: $secondary;
+  border-color: $secondary;
+  color: white;
+  
+  &:hover {
+    background-color: darken($secondary, 10%);
+    border-color: darken($secondary, 10%);
+  }
+}
+
+// FIKES Background Classes
+.bg-light-blue {
+  background-color: $light-blue !important;
+}
+
+.text-cool-gray {
+  color: $cool-gray !important;
+}
+
+.bg-off-white {
+  background-color: $off-white !important;
+}
+
+// FIKES Table Styles
+.fikes-table {
+  .table {
+    border-color: rgba($cool-gray, 0.1);
+    
+    th {
+      background-color: $light-blue;
+      color: $primary;
+      font-weight: 600;
+      border-color: rgba($cool-gray, 0.1);
+    }
+    
+    td {
+      border-color: rgba($cool-gray, 0.1);
+      color: $cool-gray;
+    }
+    
+    tbody tr:hover {
+      background-color: rgba($light-blue, 0.1);
+    }
+  }
+}
+
+// FIKES Form Styles
+.fikes-form {
+  .form-control {
+    border-color: rgba($cool-gray, 0.3);
+    
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
+  }
+  
+  .form-label {
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+// FIKES Navigation Styles
+.fikes-nav {
+  .nav-link {
+    color: $cool-gray;
+    font-weight: 500;
+    
+    &.active {
+      color: $primary;
+      background-color: rgba($primary, 0.1);
+    }
+    
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// FIKES Badge Styles
+.badge-fikes-primary {
+  background-color: $primary;
+  color: white;
+}
+
+.badge-fikes-secondary {
+  background-color: $secondary;
+  color: white;
+}
+
+// FIKES Alert Styles
+.alert-fikes-primary {
+  background-color: rgba($primary, 0.1);
+  border-color: rgba($primary, 0.2);
+  color: $primary;
+}
+
+.alert-fikes-secondary {
+  background-color: rgba($secondary, 0.1);
+  border-color: rgba($secondary, 0.2);
+  color: $secondary;
+}
+
+// FIKES Progress Styles
+.progress-fikes {
+  .progress-bar {
+    background-color: $primary;
+  }
+}
+
+// FIKES List Group Styles
+.list-group-fikes {
+  .list-group-item {
+    border-color: rgba($cool-gray, 0.1);
+    
+    &.active {
+      background-color: $primary;
+      border-color: $primary;
+    }
+    
+    &:hover {
+      background-color: rgba($light-blue, 0.1);
+    }
+  }
+}
+
+// FIKES Pagination Styles
+.pagination-fikes {
+  .page-link {
+    color: $primary;
+    border-color: rgba($cool-gray, 0.2);
+    
+    &:hover {
+      background-color: $primary;
+      border-color: $primary;
+      color: white;
+    }
+  }
+  
+  .page-item.active .page-link {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+// FIKES Modal Styles
+.modal-fikes {
+  .modal-header {
+    background-color: $light-blue;
+    border-bottom: 1px solid rgba($cool-gray, 0.1);
+    
+    .modal-title {
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+  
+  .modal-footer {
+    border-top: 1px solid rgba($cool-gray, 0.1);
+  }
+}
+
+// FIKES Responsive Styles
+@media (max-width: 768px) {
+  .fikes-header {
+    .navbar {
+      .fikes-logo {
+        .logo-circle {
+          width: 50px;
+          height: 50px;
+          font-size: 1rem;
+        }
+      }
+      
+      .navbar-brand {
+        h5 {
+          font-size: 1rem;
+        }
+        
+        small {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+  
+  .fikes-footer {
+    .container {
+      text-align: center;
+    }
+    
+    .social-links {
+      justify-content: center !important;
+    }
+  }
+}
+
+// FIKES Animation Styles
+.fikes-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// FIKES Utility Classes
+.fikes-shadow {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.fikes-shadow-lg {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.fikes-border-radius {
+  border-radius: 0.375rem;
+}
+
+.fikes-transition {
+  transition: all 0.2s ease;
+} 

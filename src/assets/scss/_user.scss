@@ -1,0 +1,1895 @@
+// Should you need to overwrite any of our SCSS code or need to add any custom code, We highly recommend that you add your code into this file, so whenever theme update is available and you update the theme, You will not lose your hard work :)
+
+// Note for dark mode:
+// Uncomment below code and change primary color code to set different primary(i.e. light color of your primary) color in dark mode only.
+
+/*User CSS*/
+
+// [data-bs-theme="dark"] {
+//   --bs-primary: #19f032 !important;
+//   --bs-primary-rgb: 25, 240, 50 !important;
+//   --bs-link-color:#19f032 !important;
+//   --bs-link-hover-color:#0c911c !important;
+//   --bs-link-color-rgb:25, 240, 50 !important;
+//   --bs-link-hover-color-rgb:12, 145, 28;
+//   --bs-nav-pills-link-active-bg: #19f032 !important;
+
+//   .navbar {
+//     --bs-navbar-hover-color: var(--#{$prefix}primary);
+//     --bs-navbar-active-color: var(--#{$prefix}primary);
+//     }
+
+//     .navbar-dark {
+//       --bs-navbar-hover-color: var(--#{$prefix}primary) !important;
+//       --bs-navbar-active-color: var(--#{$prefix}primary) !important;
+//     }
+//     .nav{
+//       --bs-nav-link-hover-color: var(--#{$prefix}primary);
+//     }
+//     .dropdown-menu {
+//       --bs-dropdown-link-hover-color: var(--#{$prefix}primary) !important;
+//       --bs-dropdown-link-hover-bg: rgba(var(--#{$prefix}primary-rgb), 0.1) !important;
+//       --bs-dropdown-link-active-color: var(--#{$prefix}primary) !important;
+//       --bs-dropdown-link-active-bg: rgba(var(--#{$prefix}primary-rgb), 0.1) !important;
+//     }
+
+//   .btn-primary {
+//     --bs-btn-bg: var(--#{$prefix}primary);
+//     --bs-btn-border-color: var(--#{$prefix}primary);
+//     --bs-btn-hover-bg: var(--#{$prefix}link-hover-color);
+//     --bs-btn-hover-border-color: var(--#{$prefix}link-hover-color);
+//     --bs-btn-active-bg: var(--#{$prefix}link-hover-color);
+//     --bs-btn-active-border-color: var(--#{$prefix}link-hover-color);
+//     --bs-btn-disabled-bg: var(--#{$prefix}primary);
+//   }
+//   .btn-link {
+//     --bs-btn-color: var(--#{$prefix}primary);
+//     --bs-link-color: var(--#{$prefix}primary);
+//     --bs-btn-hover-color: var(--#{$prefix}link-hover-color);
+//     --bs-btn-active-color: var(--#{$prefix}link-hover-color);
+//   }
+//   .btn-outline-primary {
+//     --bs-btn-color: var(--#{$prefix}primary);
+//     --bs-btn-border-color: var(--#{$prefix}primary);
+//     --bs-btn-hover-bg: var(--#{$prefix}primary);
+//     --bs-btn-hover-border-color: var(--#{$prefix}primary);
+//     --bs-btn-active-bg: var(--#{$prefix}primary);
+//     --bs-btn-active-border-color: var(--#{$prefix}primary);
+//     --bs-btn-disabled-color: var(--#{$prefix}primary);
+//     --bs-btn-disabled-border-color: var(--#{$prefix}primary);
+//   }
+//   .btn-primary-soft{
+//     color: var(--#{$prefix}primary);
+//     background-color: rgba(var(--#{$prefix}primary-rgb), 0.1);
+//     &:hover, &:focus{
+//       color: $white;
+//       background-color: var(--#{$prefix}primary) !important;
+//       border-color: var(--#{$prefix}primary) !important;
+//     }
+//   }
+//   .nav-pills {
+//     --bs-nav-pills-link-active-bg: var(--#{$prefix}primary);
+//   }
+//   .form-control:focus{
+//     border-color: var(--#{$prefix}primary);
+//   }
+//   .text-bg-primary{
+//     background-color: rgba(var(--#{$prefix}primary-rgb), 1) !important;
+//   }
+//   .form-check-input:checked {
+//     background-color: var(--#{$prefix}primary);
+//     border-color: var(--#{$prefix}primary);
+//   }
+//   .choices.is-focused .choices__inner{
+//     border-color: var(--#{$prefix}primary);
+//   }
+
+//   .btn-primary-shadow{
+//     background-color: var(--#{$prefix}primary);
+//     box-shadow: 0 0 0 10px rgba(var(--#{$prefix}primary-rgb), .4);
+//     &:hover ,&.active, &:focus{
+//       border-color: var(--#{$prefix}primary);
+//     }
+//   }
+// }
+
+// User custom styles
+// Add your custom CSS here
+
+// Import Poppins font from Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+// Set Poppins as the default font family for the entire application
+* {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+// E-CARENERS Brand Styling
+.brand-text {
+  color: #0066CC !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    color: #0052A3 !important;
+    text-decoration: none;
+  }
+}
+
+// Responsive Design Fixes
+// Mobile First Approach
+
+// Extra Small devices (phones, 576px and down)
+@media (max-width: 575.98px) {
+  // Navbar responsive fixes
+  .navbar-brand {
+    .brand-text {
+      font-size: 1rem !important;
+      letter-spacing: 0.3px;
+    }
+    
+    .navbar-brand-item {
+      height: 28px !important;
+      width: auto !important;
+    }
+  }
+  
+  // Hero section mobile optimizations
+  .hero-section {
+    min-height: 100vh;
+    padding: 2rem 0;
+    
+    .hero-title {
+      font-size: 2rem !important;
+      line-height: 1.2;
+      
+      .text-gradient {
+        font-size: 2.5rem !important;
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 1rem !important;
+      line-height: 1.5;
+    }
+    
+    .hero-badge {
+      font-size: 0.875rem !important;
+      padding: 0.5rem 1rem !important;
+    }
+    
+    .hero-features {
+      .feature-icon {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.875rem !important;
+      }
+      
+      .feature-text {
+        font-size: 0.875rem !important;
+        line-height: 1.3;
+      }
+    }
+    
+    .hero-cta {
+      .btn {
+        font-size: 0.875rem !important;
+        padding: 0.75rem 1.5rem !important;
+        
+        .btn-text {
+          font-size: 0.875rem !important;
+        }
+      }
+    }
+    
+    .hero-image-container {
+      margin-top: 2rem;
+      
+      .hero-image-bg {
+        padding: 2rem !important;
+      }
+      
+      .medical-icon-large {
+        font-size: 3rem !important;
+      }
+      
+      .floating-stat {
+        display: none !important; // Hide on very small screens
+      }
+    }
+  }
+  
+  // Navigation mobile fixes
+  .navbar-collapse {
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          padding: 0.75rem 1rem !important;
+          font-size: 0.875rem !important;
+          
+          .medical-nav-icon {
+            font-size: 1rem !important;
+          }
+          
+          .nav-link-text {
+            font-size: 0.875rem !important;
+          }
+        }
+      }
+    }
+  }
+  
+  // Container padding adjustments
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  // Footer mobile optimizations
+  .footer-section {
+    text-align: center;
+    
+    .brand-text {
+      font-size: 1.25rem !important;
+    }
+    
+    h5 {
+      font-size: 1.125rem !important;
+    }
+    
+    .nav-link {
+      font-size: 0.875rem !important;
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .hero-section {
+    .hero-title {
+      font-size: 2.5rem !important;
+      
+      .text-gradient {
+        font-size: 3rem !important;
+      }
+    }
+    
+    .hero-features {
+      .feature-text {
+        font-size: 0.9rem !important;
+      }
+    }
+  }
+  
+  .navbar-brand {
+    .brand-text {
+      font-size: 1.125rem !important;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .hero-section {
+    .hero-title {
+      font-size: 3rem !important;
+      
+      .text-gradient {
+        font-size: 3.5rem !important;
+      }
+    }
+    
+    .hero-features {
+      .feature-text {
+        font-size: 0.95rem !important;
+      }
+    }
+  }
+  
+  .navbar-brand {
+    .brand-text {
+      font-size: 1.25rem !important;
+    }
+  }
+  
+  // Tablet navigation improvements
+  .navbar-collapse {
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          padding: 0.5rem 0.75rem !important;
+          
+          .nav-link-text {
+            font-size: 0.9rem !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .hero-section {
+    .hero-title {
+      font-size: 3.5rem !important;
+      
+      .text-gradient {
+        font-size: 4rem !important;
+      }
+    }
+    
+    .hero-features {
+      .feature-text {
+        font-size: 1rem !important;
+      }
+    }
+  }
+  
+  .navbar-brand {
+    .brand-text {
+      font-size: 1.5rem !important;
+    }
+  }
+  
+  .navbar-collapse {
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          .nav-link-text {
+            font-size: 1rem !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .hero-section {
+    .hero-title {
+      font-size: 4rem !important;
+      
+      .text-gradient {
+        font-size: 4.5rem !important;
+      }
+    }
+    
+    .hero-features {
+      .feature-text {
+        font-size: 1.1rem !important;
+      }
+    }
+  }
+}
+
+// General responsive improvements
+@media (max-width: 991.98px) {
+  // Mobile navigation improvements
+  .navbar-collapse {
+    background-color: white !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    .navbar-nav {
+      padding: 1rem 0;
+      
+      .nav-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .nav-link {
+          padding: 1rem 1.5rem !important;
+          font-weight: 500;
+          
+          &:hover {
+            background-color: rgba(0, 102, 204, 0.05);
+          }
+        }
+      }
+    }
+  }
+  
+  // Mobile hamburger menu improvements
+  .navbar-toggler {
+    border: none !important;
+    padding: 0.25rem 0.5rem !important;
+    
+    &:focus {
+      box-shadow: none !important;
+    }
+    
+    .navbar-toggler-animation {
+      span {
+        background-color: #0066CC !important;
+        height: 2px !important;
+        transition: all 0.3s ease;
+        
+        &:nth-child(1) {
+          transform: rotate(0deg);
+        }
+        
+        &:nth-child(2) {
+          opacity: 1;
+        }
+        
+        &:nth-child(3) {
+          transform: rotate(0deg);
+        }
+      }
+    }
+    
+    &[aria-expanded="true"] {
+      .navbar-toggler-animation {
+        span {
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+          }
+          
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Card responsive improvements
+@media (max-width: 767.98px) {
+  .card {
+    margin-bottom: 1rem;
+    
+    .card-title {
+      font-size: 1.125rem !important;
+    }
+    
+    .card-text {
+      font-size: 0.875rem !important;
+    }
+  }
+  
+  // SOP and Video cards mobile optimization
+  .SOPCard,
+  .VideoCard {
+    .card-body {
+      padding: 1rem !important;
+    }
+    
+    .card-title {
+      font-size: 1rem !important;
+      line-height: 1.3;
+    }
+    
+    .card-text {
+      font-size: 0.8rem !important;
+      line-height: 1.4;
+    }
+  }
+}
+
+// Pagination responsive improvements
+@media (max-width: 575.98px) {
+  .pagination {
+    justify-content: center;
+    
+    .page-link {
+      padding: 0.375rem 0.75rem !important;
+      font-size: 0.875rem !important;
+      margin: 0 1px !important;
+    }
+  }
+}
+
+// Form responsive improvements
+@media (max-width: 767.98px) {
+  .form-control {
+    font-size: 1rem !important; // Prevents zoom on iOS
+  }
+  
+  .btn {
+    font-size: 1rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+}
+
+// Container responsive improvements
+@media (max-width: 575.98px) {
+  .container {
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .container {
+    max-width: 540px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container {
+    max-width: 720px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container {
+    max-width: 960px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px !important;
+  }
+}
+
+// Touch-friendly improvements for mobile
+@media (max-width: 767.98px) {
+  // Increase touch targets
+  .btn {
+    min-height: 44px !important; // Apple's recommended minimum
+    min-width: 44px !important;
+  }
+  
+  .nav-link {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .navbar-toggler {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  // Improve form elements
+  .form-control {
+    min-height: 44px !important;
+    font-size: 16px !important; // Prevents zoom on iOS
+  }
+  
+  .form-select {
+    min-height: 44px !important;
+    font-size: 16px !important;
+  }
+  
+  // Improve card interactions
+  .card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+  
+  // Improve pagination touch targets
+  .pagination {
+    .page-link {
+      min-height: 44px !important;
+      min-width: 44px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
+}
+
+// Performance optimizations
+@media (max-width: 767.98px) {
+  // Reduce animations on mobile for better performance
+  .hero-section {
+    .hero-badge,
+    .hero-title,
+    .hero-subtitle,
+    .hero-features,
+    .hero-cta,
+    .hero-image-container {
+      animation: none !important;
+    }
+  }
+  
+  // Optimize floating stats for mobile
+  .floating-stat {
+    animation: none !important;
+  }
+  
+  // Reduce box shadows on mobile for better performance
+  .card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+// Accessibility improvements
+@media (max-width: 767.98px) {
+  // Ensure proper focus indicators
+  .btn:focus,
+  .nav-link:focus,
+  .form-control:focus,
+  .page-link:focus {
+    outline: 2px solid #0066CC !important;
+    outline-offset: 2px !important;
+  }
+  
+  // Improve color contrast for better accessibility
+  .text-white-75 {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  // Ensure proper spacing for touch targets
+  .nav-item {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .btn {
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+// Landscape orientation improvements
+@media (max-width: 767.98px) and (orientation: landscape) {
+  .hero-section {
+    min-height: 100vh;
+    padding: 1rem 0;
+    
+    .hero-title {
+      font-size: 1.75rem !important;
+      
+      .text-gradient {
+        font-size: 2rem !important;
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 0.9rem !important;
+    }
+    
+    .hero-features {
+      margin-bottom: 1rem !important;
+      
+      .feature-icon {
+        width: 28px !important;
+        height: 28px !important;
+      }
+      
+      .feature-text {
+        font-size: 0.8rem !important;
+      }
+    }
+    
+    .hero-cta {
+      .btn {
+        font-size: 0.8rem !important;
+        padding: 0.5rem 1rem !important;
+      }
+    }
+  }
+}
+
+// High DPI display optimizations
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-section {
+    .hero-bg-gradient {
+      background-image: linear-gradient(135deg, #0066CC 0%, #00A896 50%, #0052A3 100%);
+    }
+  }
+  
+  .btn {
+    border-width: 0.5px !important;
+  }
+}
+
+// Print styles
+@media print {
+  .hero-section {
+    background: white !important;
+    color: black !important;
+    
+    .hero-title,
+    .hero-subtitle {
+      color: black !important;
+    }
+    
+    .hero-badge,
+    .hero-image-container,
+    .floating-stat {
+      display: none !important;
+    }
+  }
+  
+  .navbar,
+  .footer-section {
+    display: none !important;
+  }
+}
+
+// Fix color contrast issues - ensure all text is visible
+.navbar-brand {
+  .brand-text {
+    color: #0066CC !important;
+    font-weight: 700 !important;
+    
+    &:hover {
+      color: #0052A3 !important;
+    }
+  }
+}
+
+// Ensure navigation icons have proper contrast
+.medical-nav-icon {
+  color: #0066CC !important;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link:hover .medical-nav-icon {
+  color: #00A896 !important;
+  transform: scale(1.1);
+}
+
+// Fix any light text on light backgrounds
+.text-white-75 {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+// Ensure all icons have proper contrast
+.fa,
+.fas,
+.far,
+.fal,
+.fab,
+.react-icons {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+// Fix dropdown menu text contrast
+.dropdown-menu {
+  .dropdown-item {
+    color: #2C3E50 !important;
+    
+    &:hover {
+      background-color: rgba(0, 102, 204, 0.1) !important;
+      color: #0066CC !important;
+    }
+  }
+}
+
+// Fix form control text contrast
+.form-control {
+  color: #2C3E50 !important;
+  
+  &::placeholder {
+    color: #6C757D !important;
+  }
+}
+
+// Fix button text contrast
+.btn {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+  &.btn-outline-light {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    
+    &:hover {
+      color: #0066CC !important;
+      text-shadow: none;
+    }
+  }
+}
+
+// Modern Hero Section Styling
+.hero-section {
+  background: linear-gradient(135deg, #0066CC 0%, #00A896 50%, #0052A3 100%);
+  min-height: 100vh;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="medical-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23medical-pattern)"/></svg>');
+    opacity: 0.1;
+  }
+}
+
+.hero-bg-gradient {
+  background: linear-gradient(135deg, #0066CC 0%, #00A896 50%, #0052A3 100%);
+}
+
+.medical-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.hero-badge {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-title {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #E3F2FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.hero-subtitle {
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.hero-features {
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.25) !important;
+    
+    svg {
+      color: white !important;
+      font-size: 1.1rem;
+    }
+    
+    &:hover {
+      transform: scale(1.1);
+      background-color: rgba(255, 255, 255, 0.4) !important;
+    }
+  }
+}
+
+.hero-cta {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+  
+  .btn {
+    min-width: 200px;
+    transition: all 0.3s ease;
+    
+    @media (max-width: 575.98px) {
+      min-width: 100%;
+      width: 100%;
+    }
+    
+    @media (min-width: 576px) and (max-width: 991.98px) {
+      min-width: 180px;
+    }
+  }
+  
+  .btn-gradient {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+    border: none;
+    color: white !important;
+    
+    &:hover {
+      background: linear-gradient(135deg, var(--medical-secondary) 0%, var(--medical-primary) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-text,
+    .text-white {
+      color: white !important;
+    }
+  }
+  
+  .btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: white;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Ensure consistent button sizing */
+@media (max-width: 575.98px) {
+  .hero-cta {
+    .btn {
+      width: 100% !important;
+      margin: 0.5rem 0 !important;
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .hero-cta {
+    .btn {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+}
+
+.hero-image-container {
+  position: relative;
+  padding: 2rem 0;
+  
+  .hero-image-bg {
+    position: relative;
+    z-index: 2;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    
+    @media (min-width: 992px) {
+      min-height: 400px;
+    }
+  }
+  
+  .medical-illustration {
+    position: relative;
+    z-index: 3;
+    
+    .medical-icon-large {
+      animation: pulse 2s infinite;
+    }
+  }
+  
+  .floating-stat {
+    position: absolute;
+    z-index: 10;
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .stat-number {
+      color: var(--medical-primary);
+      font-weight: bold;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    
+    .stat-label {
+      color: var(--medical-gray);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    
+    // Only show on large screens to prevent overlapping
+    @media (max-width: 991.98px) {
+      display: none !important;
+    }
+    
+    // Desktop positioning - positioned inside the main image area but avoiding text overlap
+    @media (min-width: 992px) {
+      &.stat-1 {
+        top: 10%;
+        left: 10%; // Top-left corner of the image
+        animation-delay: 0s;
+      }
+      
+      &.stat-2 {
+        top: 15%;
+        right: 10%; // Top-right corner of the image
+        animation-delay: 1s;
+      }
+      
+      &.stat-3 {
+        bottom: 5%;
+        left: 15%;
+        animation-delay: 2s;
+      }
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Medical Protocol Cards
+.medical-protocol-card {
+  border-radius: 12px !important;
+  overflow: hidden;
+  
+  .medical-protocol-header {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%) !important;
+    border-bottom: 2px solid #0066CC;
+  }
+  
+  .medical-protocol-title {
+    font-weight: 600 !important;
+    color: #2C3E50 !important;
+  }
+  
+  .medical-protocol-id {
+    color: #6C757D !important;
+    font-weight: 500;
+  }
+  
+  .medical-protocol-category {
+    color: #00A896 !important;
+    font-weight: 500;
+  }
+  
+  .medical-link-icon {
+    color: #0066CC !important;
+    transition: all 0.3s ease;
+  }
+  
+  &:hover {
+    .medical-link-icon {
+      color: #00A896 !important;
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Medical-themed section headers
+.section-title {
+  color: #0066CC !important;
+  font-weight: 700 !important;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #0066CC 0%, #00A896 100%);
+    border-radius: 2px;
+  }
+}
+
+// Medical search box styling
+.form-control {
+  border-color: #E3F2FD !important;
+  
+  &:focus {
+    border-color: #0066CC !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25) !important;
+  }
+}
+
+// Medical button styling
+.btn-primary {
+  background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  
+  &:hover {
+    background: linear-gradient(135deg, #0052A3 0%, #003D7A 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3) !important;
+  }
+}
+
+// Medical pagination styling
+.pagination {
+  .page-link {
+    color: #000000 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1) !important;
+      border-color: rgba(0, 0, 0, 0.3) !important;
+      color: #000000 !important;
+    }
+    
+    &:focus {
+      color: #000000 !important;
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25) !important;
+    }
+  }
+  
+  .page-item {
+    &.active .page-link {
+      background-color: $primary !important;
+      border-color: $primary !important;
+      color: white !important;
+    }
+    
+    &.disabled .page-link {
+      color: rgba(0, 0, 0, 0.5) !important;
+      border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+}
+
+// Medical alert styling
+.alert {
+  border-radius: 12px !important;
+  border: none !important;
+  
+  &.alert-danger {
+    background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%) !important;
+    color: #C62828 !important;
+  }
+  
+  &.alert-success {
+    background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 100%) !important;
+    color: #2E7D32 !important;
+  }
+}
+
+// Medical loading spinner
+.spinner-border.text-primary {
+  color: #0066CC !important;
+}
+
+// Override navbar brand height to make logo bigger
+:root {
+  --navbar-brand-height: 36px !important;
+  --navbar-brand-padding-y: 9px !important;
+}
+
+// FIKES Design Overrides for original navbar components
+.navbar-light {
+  background-color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  padding: 6px 0 !important;
+  min-height: 45px !important;
+  
+  .navbar-brand {
+    .logo-text {
+      color: $primary !important;
+    }
+    
+    .navbar-brand-item {
+      height: 36px !important;
+      width: auto !important;
+    }
+  }
+  
+  .navbar-nav {
+    .nav-link {
+      color: $cool-gray !important;
+      font-weight: 500 !important;
+      padding: 6px 12px !important;
+      line-height: 1.2 !important;
+      
+      &:hover {
+        color: $primary !important;
+      }
+      
+      &.active {
+        color: $primary !important;
+      }
+    }
+  }
+  
+  .dropdown-menu {
+    border: none !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0.375rem !important;
+    
+    .dropdown-item {
+      color: $cool-gray !important;
+      padding: 0.5rem 1rem !important;
+      
+      &:hover {
+        background-color: rgba($primary, 0.1) !important;
+        color: $primary !important;
+      }
+    }
+  }
+  
+  .btn-primary {
+    background-color: $primary !important;
+    border-color: $primary !important;
+    
+    &:hover {
+      background-color: darken($primary, 10%) !important;
+      border-color: darken($primary, 10%) !important;
+    }
+  }
+  
+  .btn-outline-primary {
+    color: $primary !important;
+    border-color: $primary !important;
+    
+    &:hover {
+      background-color: $primary !important;
+      color: white !important;
+    }
+  }
+}
+
+// Center navigation links properly
+.navbar-collapse {
+  justify-content: center !important;
+  
+  .navbar-nav {
+    margin: 0 auto !important;
+  }
+}
+
+// Top bar styling for original navbar
+.topbar {
+  background-color: $primary !important;
+  color: white !important;
+  padding: 4.5px 0 !important;
+  
+  .topbar-text {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .topbar-link {
+    color: white !important;
+    
+    &:hover {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+  }
+  
+  .btn-outline-light {
+    color: white !important;
+    border-color: white !important;
+    
+    &:hover {
+      background-color: white !important;
+      color: $primary !important;
+    }
+  }
+}
+
+// SOPs and Videos Cards - Make all text black
+.card {
+  .card-title,
+  .card-text,
+  h5,
+  h6,
+  p,
+  small,
+  span {
+    color: #000000 !important;
+  }
+  
+  // Specific overrides for SOP cards
+  .text-muted {
+    color: #000000 !important;
+  }
+  
+  .text-info {
+    color: #000000 !important;
+  }
+  
+  // Specific overrides for video cards
+  .video-cool-card {
+    .card-title,
+    .card-text,
+    h5,
+    h6,
+    p,
+    small,
+    span {
+      color: #000000 !important;
+    }
+  }
+}
+
+// Specific overrides for SOP cards
+.SOPCard,
+.sop-card {
+  .card-title,
+  .card-text,
+  h5,
+  h6,
+  p,
+  small,
+  span {
+    color: #000000 !important;
+  }
+  
+  .text-muted {
+    color: #000000 !important;
+  }
+  
+  .text-info {
+    color: #000000 !important;
+  }
+}
+
+// Specific overrides for video cards
+.VideoCard,
+.video-card,
+.video-cool-card {
+  .card-title,
+  .card-text,
+  h5,
+  h6,
+  p,
+  small,
+  span {
+    color: #000000 !important;
+  }
+}
+
+// Override any Bootstrap text utility classes in cards
+.card {
+  .text-primary,
+  .text-secondary,
+  .text-success,
+  .text-danger,
+  .text-warning,
+  .text-info,
+  .text-light,
+  .text-dark,
+  .text-muted {
+    color: #000000 !important;
+  }
+}
+
+// Global FIKES design overrides (applies to all pages)
+// FIKES Header overrides for existing navbar
+.fikes-header {
+  .navbar {
+    .navbar-brand {
+      .logo-text {
+        color: $primary !important;
+      }
+    }
+    
+    .nav-link {
+      color: $cool-gray !important;
+      
+      &:hover {
+        color: $primary !important;
+      }
+      
+      &.active {
+        color: $primary !important;
+      }
+    }
+    
+    .dropdown-menu {
+      .dropdown-item {
+        color: $cool-gray !important;
+        
+        &:hover {
+          background-color: rgba($primary, 0.1) !important;
+          color: $primary !important;
+        }
+      }
+    }
+  }
+}
+
+// FIKES Footer overrides
+.fikes-footer {
+  .footer-section {
+    h5, h6 {
+      color: $primary !important;
+    }
+    
+    a {
+      color: rgba(255, 255, 255, 0.8) !important;
+      
+      &:hover {
+        color: $secondary !important;
+      }
+    }
+  }
+  
+  .footer-bottom {
+    background-color: $primary !important;
+  }
+}
+
+// Global button overrides
+.btn {
+  &.btn-primary {
+    background-color: $primary !important;
+    border-color: $primary !important;
+    
+    &:hover {
+      background-color: darken($primary, 10%) !important;
+      border-color: darken($primary, 10%) !important;
+    }
+  }
+  
+  &.btn-secondary {
+    background-color: $secondary !important;
+    border-color: $secondary !important;
+    
+    &:hover {
+      background-color: darken($secondary, 10%) !important;
+      border-color: darken($secondary, 10%) !important;
+    }
+  }
+  
+  &.btn-outline-primary {
+    color: $primary !important;
+    border-color: $primary !important;
+    
+    &:hover {
+      background-color: $primary !important;
+      color: white !important;
+    }
+  }
+  
+  &.btn-outline-secondary {
+    color: $secondary !important;
+    border-color: $secondary !important;
+    
+    &:hover {
+      background-color: $secondary !important;
+      color: white !important;
+    }
+  }
+}
+
+// Global card overrides
+.card {
+  border-color: rgba($cool-gray, 0.1) !important;
+  
+  .card-header {
+    background-color: $light-blue !important;
+    border-bottom-color: rgba($cool-gray, 0.1) !important;
+    color: $primary !important;
+  }
+  
+  .card-title {
+    color: $primary !important;
+  }
+  
+  .card-text {
+    color: $cool-gray !important;
+  }
+  
+  .card-footer {
+    background-color: $light-blue !important;
+    border-top-color: rgba($cool-gray, 0.1) !important;
+  }
+}
+
+// Global badge overrides
+.badge {
+  &.bg-primary {
+    background-color: $primary !important;
+  }
+  
+  &.bg-secondary {
+    background-color: $secondary !important;
+  }
+  
+  &.bg-success {
+    background-color: $secondary !important;
+  }
+}
+
+// Global text color overrides
+.text-primary {
+  color: $primary !important;
+}
+
+.text-secondary {
+  color: $secondary !important;
+}
+
+.text-muted {
+  color: $cool-gray !important;
+}
+
+// Global background color overrides
+.bg-primary {
+  background-color: $primary !important;
+}
+
+.bg-secondary {
+  background-color: $secondary !important;
+}
+
+.bg-light {
+  background-color: $light-blue !important;
+}
+
+// Global border color overrides
+.border-primary {
+  border-color: $primary !important;
+}
+
+.border-secondary {
+  border-color: $secondary !important;
+}
+
+// Global link color overrides
+a {
+  color: $primary !important;
+  
+  &:hover {
+    color: darken($primary, 10%) !important;
+  }
+}
+
+// Global form overrides
+.form-control {
+  border-color: rgba($cool-gray, 0.3) !important;
+  
+  &:focus {
+    border-color: $primary !important;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.25) !important;
+  }
+}
+
+.form-label {
+  color: $primary !important;
+  font-weight: 600;
+}
+
+// Global table overrides
+.table {
+  th {
+    background-color: $light-blue !important;
+    color: $primary !important;
+    border-color: rgba($cool-gray, 0.1) !important;
+  }
+  
+  td {
+    border-color: rgba($cool-gray, 0.1) !important;
+    color: $cool-gray !important;
+  }
+  
+  tbody tr:hover {
+    background-color: rgba($light-blue, 0.1) !important;
+  }
+}
+
+// Global navigation overrides
+.nav-pills {
+  .nav-link {
+    color: $cool-gray !important;
+    
+    &.active {
+      background-color: $primary !important;
+      color: white !important;
+    }
+    
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+
+// Global pagination overrides
+.pagination {
+  .page-link {
+    color: $primary !important;
+    border-color: rgba($cool-gray, 0.2) !important;
+    
+    &:hover {
+      background-color: $primary !important;
+      border-color: $primary !important;
+      color: white !important;
+    }
+  }
+  
+  .page-item.active .page-link {
+    background-color: $primary !important;
+    border-color: $primary !important;
+  }
+}
+
+// Global alert overrides
+.alert {
+  &.alert-primary {
+    background-color: rgba($primary, 0.1) !important;
+    border-color: rgba($primary, 0.2) !important;
+    color: $primary !important;
+  }
+  
+  &.alert-secondary {
+    background-color: rgba($secondary, 0.1) !important;
+    border-color: rgba($secondary, 0.2) !important;
+    color: $secondary !important;
+  }
+}
+
+// Global progress overrides
+.progress {
+  .progress-bar {
+    &.bg-primary {
+      background-color: $primary !important;
+    }
+    
+    &.bg-secondary {
+      background-color: $secondary !important;
+    }
+  }
+}
+
+// Global list group overrides
+.list-group {
+  .list-group-item {
+    border-color: rgba($cool-gray, 0.1) !important;
+    
+    &.active {
+      background-color: $primary !important;
+      border-color: $primary !important;
+    }
+    
+    &:hover {
+      background-color: rgba($light-blue, 0.1) !important;
+    }
+  }
+}
+
+// SOPs and Videos Cards - Make all text black
+.card {
+  .card-title,
+  .card-text,
+  h5,
+  h6,
+  p,
+  small,
+  span {
+    color: #000000 !important;
+  }
+  
+  // Specific overrides for SOP cards
+  .text-muted {
+    color: #000000 !important;
+  }
+  
+  .text-info {
+    color: #000000 !important;
+  }
+  
+  // Specific overrides for video cards
+  .video-cool-card {
+    .card-title,
+    .card-text,
+    h5,
+    h6,
+    p,
+    small,
+    span {
+      color: #000000 !important;
+    }
+  }
+}
+
+// Specific overrides for SOP cards
+.SOPCard,
+.sop-card {
+  .card-title,
+  .card-text,
+  h5,
+  h6,
+  p,
+  small,
+  span {
+    color: #000000 !important;
+  }
+  
+  .text-muted {
+    color: #000000 !important;
+  }
+  
+  .text-info {
+    color: #000000 !important;
+  }
+}
+
+// Specific overrides for video cards
+.VideoCard,
+.video-card,
+.video-cool-card {
+  .card-title,
+  .card-text,
+  h5,
+  h6,
+  p,
+  small,
+  span {
+    color: #000000 !important;
+  }
+}
+
+// Override any Bootstrap text utility classes in cards
+.card {
+  .text-primary,
+  .text-secondary,
+  .text-success,
+  .text-danger,
+  .text-warning,
+  .text-info,
+  .text-light,
+  .text-dark,
+  .text-muted {
+    color: #000000 !important;
+  }
+}
+
+// Pagination - Make all text black
+.pagination {
+  .page-link {
+    color: #000000 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1) !important;
+      border-color: rgba(0, 0, 0, 0.3) !important;
+      color: #000000 !important;
+    }
+    
+    &:focus {
+      color: #000000 !important;
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25) !important;
+    }
+  }
+  
+  .page-item {
+    &.active .page-link {
+      background-color: $primary !important;
+      border-color: $primary !important;
+      color: white !important;
+    }
+    
+    &.disabled .page-link {
+      color: rgba(0, 0, 0, 0.5) !important;
+      border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+}
+
+/* E-CARENERS Loading Components */
+.fallback-loading-container,
+.preloader-container {
+  background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  
+  .loading-content,
+  .preloader-content {
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .loading-icon,
+  .preloader-icon {
+    animation: pulse 2s infinite;
+  }
+  
+  h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.25rem;
+  }
+  
+  .preloader-progress-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    
+    .progress-value {
+      height: 100%;
+      background: white;
+      border-radius: 2px;
+      animation: progressAnimation 2s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+    margin-left: 0%;
+  }
+  50% {
+    width: 100%;
+    margin-left: 0%;
+  }
+  100% {
+    width: 0%;
+    margin-left: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
