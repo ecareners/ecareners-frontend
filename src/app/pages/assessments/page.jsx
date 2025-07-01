@@ -61,7 +61,7 @@ const AssessmentPage = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/assignments`);
+      const response = await fetch(`${API_BASE_URL}/api/assignments`);
       if (response.ok) {
         const data = await response.json();
         setAssignments(data);
@@ -79,7 +79,7 @@ const AssessmentPage = () => {
 
   const fetchAssessmentTypes = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/assessment-types`);
+      const response = await fetch(`${API_BASE_URL}/api/assessment-types`);
       if (response.ok) {
         const data = await response.json();
         setAssessmentTypes(data);
@@ -99,7 +99,7 @@ const AssessmentPage = () => {
   const fetchStudents = async (assignmentId) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/assignments/${assignmentId}/students`);
+      const response = await fetch(`${API_BASE_URL}/api/assignments/${assignmentId}/students`);
       if (response.ok) {
         const data = await response.json();
         setStudents(data);
@@ -116,7 +116,7 @@ const AssessmentPage = () => {
   const fetchStudentsForAssessmentType = async (assessmentType) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/assessment-types/${assessmentType}/students`);
+      const response = await fetch(`${API_BASE_URL}/api/assessment-types/${assessmentType}/students`);
       if (response.ok) {
         const data = await response.json();
         setStudents(data);
@@ -138,7 +138,7 @@ const AssessmentPage = () => {
       
       if (assessmentMode === 'assignment' && selectedStudent?.submission) {
         // Assessment with submission
-        response = await fetch(`${API_BASE_URL}/assessments`, {
+        response = await fetch(`${API_BASE_URL}/api/assessments`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ const AssessmentPage = () => {
         });
       } else {
         // Direct assessment without submission
-        response = await fetch(`${API_BASE_URL}/assessments/direct`, {
+        response = await fetch(`${API_BASE_URL}/api/assessments/direct`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

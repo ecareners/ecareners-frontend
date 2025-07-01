@@ -3,7 +3,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 // API function to get all SOPs
 export const fetchAllSOPs = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/sops`);
+    const response = await fetch(`${API_BASE_URL}/api/sops`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -18,7 +18,7 @@ export const fetchAllSOPs = async () => {
 // API function to get all Videos
 export const fetchAllVideos = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/videos`);
+    const response = await fetch(`${API_BASE_URL}/api/videos`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -33,7 +33,7 @@ export const fetchAllVideos = async () => {
 // API function to get SOP by ID
 export const fetchSOPById = async (sopId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/sops/${sopId}`);
+    const response = await fetch(`${API_BASE_URL}/api/sops/${sopId}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -48,7 +48,7 @@ export const fetchSOPById = async (sopId) => {
 // API function to create new SOP
 export const createNewSOP = async (title, url, category = '') => {
   try {
-    const response = await fetch(`${API_BASE_URL}/sops`, {
+    const response = await fetch(`${API_BASE_URL}/api/sops`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export const createNewSOP = async (title, url, category = '') => {
 // API function to update SOP
 export const updateExistingSOP = async (sopId, title, url, category = '') => {
   try {
-    const response = await fetch(`${API_BASE_URL}/sops/${sopId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/sops/${sopId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ export const updateExistingSOP = async (sopId, title, url, category = '') => {
 // API function to delete SOP
 export const deleteExistingSOP = async (sopId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/sops/${sopId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/sops/${sopId}`, {
       method: 'DELETE',
     });
     if (!response.ok) {

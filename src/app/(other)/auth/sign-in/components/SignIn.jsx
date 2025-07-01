@@ -37,7 +37,8 @@ const SignIn = () => {
     setServerError('');
     setLoading(true);
     try {
-      const res = await httpClient.post('/api/login', data);
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const res = await httpClient.post(`${API_BASE_URL}/api/login`, data);
       // Save user and token in Auth context
       login(res.data.user, res.data.token);
       // Redirect to intended page or home

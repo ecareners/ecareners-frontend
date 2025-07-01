@@ -7,8 +7,8 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getAllVideos = async () => {
   try {
-    console.log('Fetching videos from:', `${API_BASE_URL}/videos`);
-    const response = await fetch(`${API_BASE_URL}/videos`);
+    console.log('Fetching videos from:', `${API_BASE_URL}/api/videos`);
+    const response = await fetch(`${API_BASE_URL}/api/videos`);
     console.log('Response status:', response.status);
     
     if (!response.ok) {
@@ -154,8 +154,8 @@ export const getAllCourseResume = async () => {
 
 export const getAllAssignments = async () => {
   try {
-    console.log('Fetching assignments from:', `${API_BASE_URL}/assignments`);
-    const response = await fetch(`${API_BASE_URL}/assignments`);
+    console.log('Fetching assignments from:', `${API_BASE_URL}/api/assignments`);
+    const response = await fetch(`${API_BASE_URL}/api/assignments`);
     console.log('Response status:', response.status);
     
     if (!response.ok) {

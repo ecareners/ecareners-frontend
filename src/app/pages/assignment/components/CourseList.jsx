@@ -17,10 +17,11 @@ const VideoList = () => {
   const [sortBy, setSortBy] = useState('Sort by');
   const [userSubmissions, setUserSubmissions] = useState([]);
   const videosPerPage = 8;
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (user) {
-      fetch(`/api/submissions?user_id=${user.user_id}`)
+      fetch(`${API_BASE_URL}/api/submissions?user_id=${user.user_id}`)
         .then(res => res.json())
         .then(setUserSubmissions);
     }

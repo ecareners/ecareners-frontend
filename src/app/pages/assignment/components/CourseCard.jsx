@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/useAuthContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 const CourseCard = ({ video }) => {
   const { user } = useAuth();
   const { title, description, assignment_type, due_date, semester, academic_year, assignment_id, isSubmitted } = video;
@@ -14,7 +16,7 @@ const CourseCard = ({ video }) => {
       if (!user || !isSubmitted) return;
       
       try {
-        const response = await fetch(`http://localhost:5000/api/users/${user.user_id}/assessments`);
+        const response = await fetch(`${API_BASE_URL}/api/users/${user.user_id}/assessments`);
         if (response.ok) {
           const assessments = await response.json();
           

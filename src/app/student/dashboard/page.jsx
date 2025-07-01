@@ -28,7 +28,7 @@ const DashboardPage = () => {
         const userSubmissions = allSubmissions.filter(s => s.user_id === user.user_id);
         
         // Fetch user's assessments
-        const assessmentsResponse = await fetch(`${API_BASE_URL}/users/${user.user_id}/assessments`);
+        const assessmentsResponse = await fetch(`${API_BASE_URL}/api/users/${user.user_id}/assessments`);
         const assessments = await assessmentsResponse.json();
         
         // Calculate stats

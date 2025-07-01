@@ -32,7 +32,7 @@ const SubmissionPage = () => {
         setLoading(true);
         
         // Fetch assignment details
-        const assignmentResponse = await fetch(`${API_BASE_URL}/assignments`);
+        const assignmentResponse = await fetch(`${API_BASE_URL}/api/assignments`);
         const assignments = await assignmentResponse.json();
         const currentAssignment = assignments.find(a => a.assignment_id == assignmentId);
         
@@ -45,7 +45,7 @@ const SubmissionPage = () => {
         // Fetch user's submission for this assignment
         if (user) {
           try {
-            const submissionResponse = await fetch(`${API_BASE_URL}/submissions/${user.user_id}/${assignmentId}`);
+            const submissionResponse = await fetch(`${API_BASE_URL}/api/submissions/${user.user_id}/${assignmentId}`);
             if (submissionResponse.ok) {
               const submissionData = await submissionResponse.json();
               setSubmission(submissionData);
@@ -56,7 +56,7 @@ const SubmissionPage = () => {
               
               // Fetch assessment for this submission
               try {
-                const assessmentResponse = await fetch(`${API_BASE_URL}/users/${user.user_id}/assessments`);
+                const assessmentResponse = await fetch(`${API_BASE_URL}/api/users/${user.user_id}/assessments`);
                 if (assessmentResponse.ok) {
                   const assessments = await assessmentResponse.json();
                   console.log('📊 All assessments:', assessments);
@@ -121,7 +121,7 @@ const SubmissionPage = () => {
         });
       }, 200);
 
-      const response = await fetch(`${API_BASE_URL}/upload-to-drive`, {
+      const response = await fetch(`${API_BASE_URL}/api/upload-to-drive`, {
         method: 'POST',
         body: formData,
       });
@@ -162,7 +162,7 @@ const SubmissionPage = () => {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}/assignments/${assignmentId}/submit`, {
+      const response = await fetch(`${API_BASE_URL}/api/assignments/${assignmentId}/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ const SubmissionPage = () => {
 
       if (response.ok) {
         // Refresh submission data
-        const submissionResponse = await fetch(`${API_BASE_URL}/submissions/${user.user_id}/${assignmentId}`);
+        const submissionResponse = await fetch(`${API_BASE_URL}/api/submissions/${user.user_id}/${assignmentId}`);
         if (submissionResponse.ok) {
           const submissionData = await submissionResponse.json();
           setSubmission(submissionData);

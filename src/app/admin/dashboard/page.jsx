@@ -20,17 +20,19 @@ const AdminDashboardPage = () => {
     totalAssessments: 0
   });
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchAdminStats = async () => {
       if (!user) return;
       
       try {
         // Fetch all users
-        const usersResponse = await fetch('http://localhost:5000/api/users');
+        const usersResponse = await fetch(`${API_BASE_URL}/api/users`);
         const allUsers = await usersResponse.json();
         
         // Fetch all assessments
-        const assessmentsResponse = await fetch('http://localhost:5000/api/assessments');
+        const assessmentsResponse = await fetch(`${API_BASE_URL}/api/assessments`);
         const allAssessments = await assessmentsResponse.json();
         
         // Calculate stats

@@ -29,7 +29,7 @@ const DashboardPage = () => {
         const students = allUsers.filter(u => u.role === 'student' || u.role === 'mahasiswa');
         
         // Fetch all assessments by this instructor
-        const assessmentsResponse = await fetch(`${API_BASE_URL}/assessments`);
+        const assessmentsResponse = await fetch(`${API_BASE_URL}/api/assessments`);
         const allAssessments = await assessmentsResponse.json();
         const instructorAssessments = allAssessments.filter(a => a.assessor_user_id === user.user_id);
         

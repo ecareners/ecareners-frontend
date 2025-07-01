@@ -5,6 +5,8 @@ import { useAuth } from '@/context/useAuthContext';
 import PageMetaData from '@/components/PageMetaData';
 import TopNavigationBar from '../event-detail/components/TopNavigationBar';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 const ConferencePage = () => {
   const { userRole } = useAuth();
   const [conferences, setConferences] = useState([]);
@@ -30,7 +32,7 @@ const ConferencePage = () => {
   const fetchConferences = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/conferences');
+      const response = await fetch(`${API_BASE_URL}/api/conferences`);
       if (!response.ok) {
         throw new Error('Failed to fetch conferences');
       }
@@ -48,7 +50,7 @@ const ConferencePage = () => {
   const handleCreateConference = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/conferences', {
+      const response = await fetch(`${API_BASE_URL}/api/conferences`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ const ConferencePage = () => {
   const handleEditConference = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/conferences/${editingConference.conference_id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/conferences/${editingConference.conference_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +118,7 @@ const ConferencePage = () => {
     }
 
     try {
-      const response = await fetch(`/api/conferences/${conferenceId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/conferences/${conferenceId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -196,7 +198,7 @@ const ConferencePage = () => {
   const handleSetupTable = async () => {
     try {
       setSetupLoading(true);
-      const response = await fetch('/api/setup/conference-table', {
+      const response = await fetch(`${API_BASE_URL}/api/setup/conference-table`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
