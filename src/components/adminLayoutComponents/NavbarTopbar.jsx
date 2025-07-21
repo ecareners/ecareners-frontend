@@ -45,7 +45,7 @@ const NavbarTopbar = () => {
                 <div className="my-3 my-xl-0 ">
                   <div className="nav-item w-100">
                     <form className="position-relative">
-                      <input className="form-control pe-5 bg-secondary bg-opacity-10 border-0" type="search" placeholder="Search" aria-label="Search" />
+                      <input className="form-control pe-5 bg-secondary bg-opacity-10 border-0" type="search" placeholder="Pencarian" aria-label="Search" />
                       <button className="bg-transparent px-2 py-0 border-0 position-absolute top-50 end-0 translate-middle-y" type="submit">
                         <FaSearch className="text-primary" />
                       </button>

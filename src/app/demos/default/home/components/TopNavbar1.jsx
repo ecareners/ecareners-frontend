@@ -9,31 +9,31 @@ import { FaStethoscope, FaVideo, FaClipboardList, FaUserMd, FaChartLine } from '
 const MEDICAL_MENU_ITEMS = [
   {
     key: 'protocols',
-    label: 'Protocols',
+    label: 'Protokol',
     icon: FaStethoscope,
     url: '/pages/protocols', // SOPs page
   },
   {
     key: 'training',
-    label: 'Videos',
+    label: 'Video',
     icon: FaVideo,
     url: '/pages/videos', // Current page
   },
   {
     key: 'case-studies',
-    label: 'Assignment',
+    label: 'Tugas',
     icon: FaClipboardList,
     url: '/pages/assignment', // Video Library page
   },
   {
     key: 'conferences',
-    label: 'Conference',
+    label: 'Konferensi',
     icon: FaUserMd,
     url: '/pages/conference', // Conference page
   },
   {
     key: 'assessments',
-    label: 'Assessment',
+    label: 'Penilaian',
     icon: FaChartLine,
     url: '/pages/assessments', // Assessment page
   }

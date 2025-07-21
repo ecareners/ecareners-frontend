@@ -140,7 +140,7 @@ const DashboardPage = () => {
                       </div>
                     </div>
                     <h3 className="mb-1">{userStats.totalAssignments}</h3>
-                    <p className="text-muted mb-0">Total Assignments</p>
+                    <p className="text-muted mb-0">Total Tugas</p>
                   </Card.Body>
                 </Card>
               </Col>
@@ -163,7 +163,7 @@ const DashboardPage = () => {
                       </div>
                     </div>
                     <h3 className="mb-1">{userStats.averageScore}%</h3>
-                    <p className="text-muted mb-0">Average Score</p>
+                    <p className="text-muted mb-0">Rata-rata Nilai</p>
                   </Card.Body>
                 </Card>
               </Col>
@@ -186,7 +186,7 @@ const DashboardPage = () => {
                       </div>
                     </div>
                     <h3 className="mb-1">{userStats.submittedAssignments}</h3>
-                    <p className="text-muted mb-0">Submitted</p>
+                    <p className="text-muted mb-0">Tugas Terkirim</p>
                   </Card.Body>
                 </Card>
               </Col>
@@ -209,7 +209,7 @@ const DashboardPage = () => {
                       </div>
                     </div>
                     <h3 className="mb-1">{userStats.totalAssignments - userStats.submittedAssignments}</h3>
-                    <p className="text-muted mb-0">Pending</p>
+                    <p className="text-muted mb-0">Tugas Tertunda</p>
                   </Card.Body>
                 </Card>
               </Col>
@@ -222,11 +222,11 @@ const DashboardPage = () => {
           <Col>
             <Card className="border-0 shadow-sm">
               <Card.Body className="p-4">
-                <h5 className="mb-3">Assignment Progress</h5>
+                <h5 className="mb-3">Progres Tugas</h5>
                 <div className="d-flex align-items-center mb-3">
                   <div className="flex-grow-1 me-3">
                     <div className="d-flex justify-content-between mb-1">
-                      <span>Overall Progress</span>
+                      <span>Progres Tugas</span>
                       <span>{userStats.totalAssignments > 0 ? Math.round((userStats.submittedAssignments / userStats.totalAssignments) * 100) : 0}%</span>
                     </div>
                     <ProgressBar 
@@ -240,15 +240,15 @@ const DashboardPage = () => {
                 <div className="row text-center">
                   <div className="col-4">
                     <h6 className="text-success mb-1">{userStats.submittedAssignments}</h6>
-                    <small className="text-muted">Submitted</small>
+                    <small className="text-muted">Terkirim</small>
                   </div>
                   <div className="col-4">
                     <h6 className="text-warning mb-1">{userStats.totalAssignments - userStats.submittedAssignments}</h6>
-                    <small className="text-muted">Pending</small>
+                    <small className="text-muted">Tertunda</small>
                   </div>
                   <div className="col-4">
                     <h6 className="text-info mb-1">{userStats.averageScore}%</h6>
-                    <small className="text-muted">Average</small>
+                    <small className="text-muted">Rata-rata</small>
                   </div>
                 </div>
               </Card.Body>

@@ -9,7 +9,7 @@ const Footer = ({
       <Container>
         <div className="text-center">
           <p className="mb-0 text-muted">
-            Copyrights ©2025 E-CARENERS
+            Hak Cipta ©2025 E-CARENERS
           </p>
         </div>
       </Container>

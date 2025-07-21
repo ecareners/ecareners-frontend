@@ -7,19 +7,19 @@ const Counter = () => {
   const navigate = useNavigate();
 
   const handleCounterClick = (item) => {
-    // Navigate to different pages based on the counter type
+    // Redirect ke link navbar
     switch (item.title) {
       case 'SOPs':
-        navigate('/pages/course/grid-2');
+        navigate('/pages/protocols');
         break;
       case 'Education Video':
         navigate('/pages/videos');
         break;
       case 'Assignment':
-        navigate('/instructor/create-course');
+        navigate('/pages/assignment');
         break;
       case 'Evaluation':
-        navigate('/instructor/student-list');
+        navigate('/pages/assessments');
         break;
       default:
         console.log('No navigation defined for:', item.title);

@@ -38,7 +38,20 @@ const RequestAccess = lazy(() => import('@/app/pages/form/request-access/page'))
 const AdmissionForm = lazy(() => import('@/app/pages/form/admission-form/page'));
 const AssignmentSubmission = lazy(() => import('@/app/pages/assignment/assignment/[assignmentId]/submission/page'));
 const AssessmentPage = lazy(() => import('@/app/pages/assessments/page'));
+const AssessmentFormPage = lazy(() => import('@/app/pages/assessments/form/page'));
+const PreConferenceAssessmentPage = lazy(() => import('@/app/pages/assessments/pre_conference/page'));
+const PostConferenceAssessmentPage = lazy(() => import('@/app/pages/assessments/post_conference/page'));
+const SikapMahasiswaAssessmentPage = lazy(() => import('@/app/pages/assessments/sikap_mahasiswa/page'));
+const KeterampilanProseduralKlinikDOPSAssessmentPage = lazy(() => import('@/app/pages/assessments/keterampilan_prosedural_klinik_dops/page'));
+const UjianKlinikAssessmentPage = lazy(() => import('@/app/pages/assessments/ujian_klinik/page'));
+const LaporanPendahuluanAssessmentPage = lazy(() => import('@/app/pages/assessments/laporan_pendahuluan/page'));
+const AsuhanKeperawatanAssessmentPage = lazy(() => import('@/app/pages/assessments/asuhan_keperawatan/page'));
+const AnalisaSintesaAssessmentPage = lazy(() => import('@/app/pages/assessments/analisa_sintesa/page'));
+const ArtikelJurnalAssessmentPage = lazy(() => import('@/app/pages/assessments/artikel_jurnal/page'));
+const CaseReportAssessmentPage = lazy(() => import('@/app/pages/assessments/case_report/page'));
 const ConferencePage = lazy(() => import('@/app/pages/conference/page'));
+const LaporanPage = lazy(() => import('@/app/pages/assessments/laporan/page'));
+const RekapAssessmentPage = lazy(() => import('@/app/pages/assessments/rekap.jsx'));
 
 // about pages
 const AboutUs = lazy(() => import('@/app/pages/about/about-us/page'));
@@ -272,6 +285,50 @@ const pagesRoutes = [{
   name: 'Assessment Page',
   element: <AssessmentPage />
 }, {
+  path: '/pages/assessments/form',
+  name: 'Assessment Form',
+  element: <AssessmentFormPage />
+}, {
+  path: '/pages/assessments/pre_conference',
+  name: 'Pre Conference Assessment',
+  element: <PreConferenceAssessmentPage />
+}, {
+  path: '/pages/assessments/post_conference',
+  name: 'Post Conference Assessment',
+  element: <PostConferenceAssessmentPage />
+}, {
+  path: '/pages/assessments/sikap_mahasiswa',
+  name: 'Sikap Mahasiswa Assessment',
+  element: <SikapMahasiswaAssessmentPage />
+}, {
+  path: '/pages/assessments/keterampilan_prosedural_klinik_dops',
+  name: 'Keterampilan Prosedural Klinik DOPS Assessment',
+  element: <KeterampilanProseduralKlinikDOPSAssessmentPage />
+}, {
+  path: '/pages/assessments/ujian_klinik',
+  name: 'Ujian Klinik Assessment',
+  element: <UjianKlinikAssessmentPage />
+}, {
+  path: '/pages/assessments/laporan_pendahuluan',
+  name: 'Laporan Pendahuluan Assessment',
+  element: <LaporanPendahuluanAssessmentPage />
+}, {
+  path: '/pages/assessments/asuhan_keperawatan',
+  name: 'Asuhan Keperawatan Assessment',
+  element: <AsuhanKeperawatanAssessmentPage />
+}, {
+  path: '/pages/assessments/analisa_sintesa',
+  name: 'Analisa Sintesa Assessment',
+  element: <AnalisaSintesaAssessmentPage />
+}, {
+  path: '/pages/assessments/artikel_jurnal',
+  name: 'Artikel Jurnal Assessment',
+  element: <ArtikelJurnalAssessmentPage />
+}, {
+  path: '/pages/assessments/case_report',
+  name: 'Case Report Assessment',
+  element: <CaseReportAssessmentPage />
+}, {
   path: '/pages/conference',
   name: 'Conference Page',
   element: <ConferencePage />
@@ -279,6 +336,18 @@ const pagesRoutes = [{
   path: '/pages/videos',
   name: 'Videos',
   element: <VideoListPage />
+}, {
+  path: '/pages/assessments/laporan',
+  name: 'Laporan Assessment',
+  element: <LaporanPage />
+}, {
+  path: '/pages/assessments/telaah_artikel_jurnal',
+  name: 'Telaah Artikel Jurnal Assessment (alias)',
+  element: <ArtikelJurnalAssessmentPage />
+}, {
+  path: '/pages/assessments/rekap',
+  name: 'Rekap Assessment Mahasiswa',
+  element: <RekapAssessmentPage />
 }];
 export const shopRoutes = [{
   path: '/shop',
@@ -480,3 +549,14 @@ export const adminRoutes = [{
   element: <NotFound />
 }];
 export const appRoutes = [...initialRoutes, ...demosRoutes, ...otherRoutes, ...pagesRoutes, ...helpRoutes];
+
+// Komponen redirect
+function MahasiswaAssessmentRedirect() {
+  const { user } = require('@/context/useAuthContext').useAuth();
+  if (user && user.role === 'mahasiswa') {
+    return <Navigate to="/pages/assessments/rekap" replace />;
+  }
+  // fallback: tetap render halaman assessment biasa jika bukan mahasiswa
+  const AssessmentPage = require('@/app/pages/assessments/page').default;
+  return <AssessmentPage />;
+}

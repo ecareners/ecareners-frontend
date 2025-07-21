@@ -13,17 +13,17 @@ const Hero = () => {
           <Col lg={6} className="text-center text-lg-start mb-5 mb-lg-0">
             <div className="hero-badge d-inline-flex align-items-center bg-white bg-opacity-10 backdrop-blur-sm rounded-pill px-4 py-2 mb-4">
               <FaStethoscope className="text-primary me-2" />
-              <span className="text-white fw-medium">Powered by E-CARENERS</span>
+              <span className="text-white fw-medium">Dikelola oleh E-CARENERS</span>
             </div>
             
             <h1 className="hero-title display-4 fw-bold text-white mb-4">
-              Welcome to
+              Selamat datang di
               <span className="text-gradient d-block">E-CARENERS</span>
-              Medical Learning Platform
+              Platform Pembelajaran Kedokteran
             </h1>
             
             <p className="hero-subtitle lead text-white-75 mb-5 fs-5">
-              E-CARENERS provides comprehensive protocols, training videos, and professional development resources designed by healthcare experts.
+              E-CARENERS menyediakan protokol komprehensif, video latihan, dan sumber daya pengembangan profesional yang dirancang oleh ahli kesehatan.
             </p>
             
             <div className="hero-features mb-5">
@@ -33,7 +33,7 @@ const Hero = () => {
                     <div className="feature-icon bg-white bg-opacity-25 rounded-circle p-2 me-3">
                       <FaUserMd className="text-white" />
                     </div>
-                    <span className="feature-text">Expert-led Training</span>
+                    <span className="feature-text">Pelatihan Berbimbing Ahli</span>
                   </div>
                 </div>
                 <div className="col-6 col-sm-6">
@@ -41,7 +41,7 @@ const Hero = () => {
                     <div className="feature-icon bg-white bg-opacity-25 rounded-circle p-2 me-3">
                       <FaGraduationCap className="text-white" />
                     </div>
-                    <span className="feature-text">Professional Certificates</span>
+                    <span className="feature-text">Sertifikat Profesional</span>
                   </div>
                 </div>
                 <div className="col-6 col-sm-6">
@@ -49,7 +49,7 @@ const Hero = () => {
                     <div className="feature-icon bg-white bg-opacity-25 rounded-circle p-2 me-3">
                       <FaStethoscope className="text-white" />
                     </div>
-                    <span className="feature-text">Protocols</span>
+                    <span className="feature-text">Protokol</span>
                   </div>
                 </div>
                 <div className="col-6 col-sm-6">
@@ -57,7 +57,7 @@ const Hero = () => {
                     <div className="feature-icon bg-white bg-opacity-25 rounded-circle p-2 me-3">
                       <FaPlay className="text-white" />
                     </div>
-                    <span className="feature-text">Video Training</span>
+                    <span className="feature-text">Video Latihan</span>
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@ const Hero = () => {
                 className="btn-gradient px-5 py-3 fw-semibold mx-auto mx-lg-0 text-white"
                 href="/pages/protocols"
               >
-                <span className="btn-text text-white">Explore Protocols</span>
+                <span className="btn-text text-white">Jelajahi Protokol</span>
                 <BsArrowRight className="ms-2 text-white" />
               </Button>
               <Button 
@@ -80,7 +80,7 @@ const Hero = () => {
                 href="/pages/videos"
               >
                 <FaPlay className="me-2" />
-                <span className="btn-text">Watch Training</span>
+                <span className="btn-text">Tonton Latihan</span>
               </Button>
             </div>
           </Col>
@@ -95,7 +95,7 @@ const Hero = () => {
                     </div>
                     <h3 className="text-white fw-semibold mb-3">E-CARENERS Excellence</h3>
                     <p className="text-white-75 mb-0">
-                      Join thousands of healthcare professionals advancing their skills with E-CARENERS
+                      Bergabung dengan ribuan profesional kesehatan yang berusaha meningkatkan keterampilan dengan E-CARENERS
                     </p>
             </div>
             </div>
@@ -104,21 +104,21 @@ const Hero = () => {
               <div className="floating-stat stat-1 position-absolute bg-white rounded-3 p-3 shadow-lg d-none d-lg-block">
                 <div className="text-center">
                   <div className="stat-number text-primary fw-bold fs-4">500+</div>
-                  <div className="stat-label text-muted small">Protocols</div>
+                  <div className="stat-label text-muted small">Protokol</div>
                 </div>
               </div>
               
               <div className="floating-stat stat-2 position-absolute bg-white rounded-3 p-3 shadow-lg d-none d-lg-block">
                 <div className="text-center">
                   <div className="stat-number text-primary fw-bold fs-4">10K+</div>
-                  <div className="stat-label text-muted small">Healthcare Professionals</div>
+                  <div className="stat-label text-muted small">Profesional Kesehatan</div>
               </div>
             </div>
               
               <div className="floating-stat stat-3 position-absolute bg-white rounded-3 p-3 shadow-lg d-none d-lg-block">
                 <div className="text-center">
                   <div className="stat-number text-primary fw-bold fs-4">24/7</div>
-                  <div className="stat-label text-muted small">Access</div>
+                  <div className="stat-label text-muted small">Akses</div>
                   </div>
             </div>
             </div>

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Container, Row, Col, Card, Button, Form, Alert, Badge, 
-  Modal, ProgressBar, Dropdown, Pagination 
+  Dropdown, Pagination 
 } from 'react-bootstrap';
 import { 
   FaArrowLeft, FaFileAlt, FaCalendarAlt, FaCheckCircle, 
   FaTimesCircle, FaEdit, FaSave, FaDownload, FaEye, 
-  FaStar, FaFilter, FaSearch, FaGraduationCap, FaUserGraduate, FaInfoCircle 
+  FaStar, FaFilter, FaSearch, FaGraduationCap, FaUserGraduate, FaInfoCircle,
+  FaClipboardList, FaUserTie, FaChartLine, FaBook, FaFileAlt as FaFile
 } from 'react-icons/fa';
 import { useAuth } from '@/context/useAuthContext';
 
@@ -17,25 +18,15 @@ const AssessmentPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   
-  const [assignments, setAssignments] = useState([]);
-  const [assessmentTypes, setAssessmentTypes] = useState([]);
-  const [selectedAssignment, setSelectedAssignment] = useState(null);
-  const [selectedAssessmentType, setSelectedAssessmentType] = useState(null);
   const [students, setStudents] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [selectedAssessmentType, setSelectedAssessmentType] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showAssessmentModal, setShowAssessmentModal] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  const [assessmentForm, setAssessmentForm] = useState({
-    score: '',
-    comments: '',
-    assessment_type: 'pre_conference'
-  });
-  const [currentPage, setCurrentPage] = useState(1);
-  const [studentsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-  const [assessmentMode, setAssessmentMode] = useState('assignment'); // 'assignment' or 'direct'
+  const [currentPage, setCurrentPage] = useState(1);
+  const studentsPerPage = 10;
 
   // Check if user has permission to access assessments
   useEffect(() => {
@@ -47,17 +38,9 @@ const AssessmentPage = () => {
   }, [user]);
 
   useEffect(() => {
+    fetchStudents();
     fetchAssignments();
-    fetchAssessmentTypes();
   }, []);
-
-  useEffect(() => {
-    if (selectedAssignment && assessmentMode === 'assignment') {
-      fetchStudents(selectedAssignment.assignment_id);
-    } else if (selectedAssessmentType && assessmentMode === 'direct') {
-      fetchStudentsForAssessmentType(selectedAssessmentType);
-    }
-  }, [selectedAssignment, selectedAssessmentType, assessmentMode]);
 
   const fetchAssignments = async () => {
     try {
@@ -65,41 +48,19 @@ const AssessmentPage = () => {
       if (response.ok) {
         const data = await response.json();
         setAssignments(data);
-        if (data.length > 0) {
-          setSelectedAssignment(data[0]);
-        }
       } else {
         throw new Error('Failed to fetch assignments');
       }
     } catch (err) {
-      console.error('Error fetching assignments:', err);
-      // Don't set error here as we can still use direct assessment
+      setError('Failed to fetch assignments: ' + err.message);
     }
   };
 
-  const fetchAssessmentTypes = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/assessment-types`);
-      if (response.ok) {
-        const data = await response.json();
-        setAssessmentTypes(data);
-        if (data.length > 0) {
-          setSelectedAssessmentType(data[0].value);
-        }
-      } else {
-        throw new Error('Failed to fetch assessment types');
-      }
-    } catch (err) {
-      setError('Failed to fetch assessment types: ' + err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchStudents = async (assignmentId) => {
+  const fetchStudents = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/api/assignments/${assignmentId}/students`);
+      // Use the new endpoint to get all students
+      const response = await fetch(`${API_BASE_URL}/api/students`);
       if (response.ok) {
         const data = await response.json();
         setStudents(data);
@@ -111,109 +72,6 @@ const AssessmentPage = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const fetchStudentsForAssessmentType = async (assessmentType) => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/api/assessment-types/${assessmentType}/students`);
-      if (response.ok) {
-        const data = await response.json();
-        setStudents(data);
-      } else {
-        throw new Error('Failed to fetch students for assessment type');
-      }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAssessmentSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-      let response;
-      
-      if (assessmentMode === 'assignment' && selectedStudent?.submission) {
-        // Assessment with submission
-        response = await fetch(`${API_BASE_URL}/api/assessments`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            submission_id: selectedStudent.submission.submission_id,
-            assessed_user_id: selectedStudent.user_id,
-            assessor_user_id: user.user_id,
-            assessment_type: assessmentForm.assessment_type,
-            score: parseInt(assessmentForm.score),
-            comments: assessmentForm.comments,
-            academic_year: new Date().getFullYear(),
-            semester: 'Ganjil'
-          }),
-        });
-      } else {
-        // Direct assessment without submission
-        response = await fetch(`${API_BASE_URL}/api/assessments/direct`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            assessed_user_id: selectedStudent.user_id,
-            assessor_user_id: user.user_id,
-            assessment_type: assessmentForm.assessment_type,
-            score: parseInt(assessmentForm.score),
-            comments: assessmentForm.comments,
-            academic_year: new Date().getFullYear(),
-            semester: 'Ganjil'
-          }),
-        });
-      }
-
-      if (response.ok) {
-        setShowAssessmentModal(false);
-        setAssessmentForm({ score: '', comments: '', assessment_type: 'pre_conference' });
-        // Refresh students data
-        if (assessmentMode === 'assignment' && selectedAssignment) {
-          fetchStudents(selectedAssignment.assignment_id);
-        } else if (assessmentMode === 'direct' && selectedAssessmentType) {
-          fetchStudentsForAssessmentType(selectedAssessmentType);
-        }
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Failed to submit assessment');
-      }
-    } catch (err) {
-      setError('Failed to submit assessment: ' + err.message);
-    }
-  };
-
-  const openAssessmentModal = (student) => {
-    setSelectedStudent(student);
-    if (student.assessment) {
-      setAssessmentForm({
-        score: student.assessment.score || '',
-        comments: student.assessment.comments || '',
-        assessment_type: student.assessment.assessment_type || 'pre_conference'
-      });
-    } else {
-      setAssessmentForm({
-        score: '',
-        comments: '',
-        assessment_type: selectedAssessmentType || 'pre_conference'
-      });
-    }
-    setShowAssessmentModal(true);
-  };
-
-  const getScoreColor = (score) => {
-    if (score >= 90) return 'success';
-    if (score >= 80) return 'info';
-    if (score >= 70) return 'warning';
-    return 'danger';
   };
 
   const getAssessmentTypeLabel = (type) => {
@@ -232,14 +90,48 @@ const AssessmentPage = () => {
     return types[type] || type;
   };
 
+  const getAssessmentTypes = () => {
+    // 5 direct assessments (no assignment required)
+    const directAssessments = [
+      { type: 'pre_conference', label: 'Penilaian Pre Conference', icon: FaUserTie, color: 'primary', requiresAssignment: false },
+      { type: 'post_conference', label: 'Penilaian Post Conference', icon: FaUserTie, color: 'info', requiresAssignment: false },
+      { type: 'sikap_mahasiswa', label: 'Penilaian Sikap Mahasiswa', icon: FaUserGraduate, color: 'success', requiresAssignment: false },
+      { type: 'keterampilan_prosedural_klinik_dops', label: 'Keterampilan Prosedural Klinik DOPS', icon: FaClipboardList, color: 'warning', requiresAssignment: false },
+      { type: 'ujian_klinik', label: 'Penilaian Ujian Klinik', icon: FaChartLine, color: 'danger', requiresAssignment: false }
+    ];
+
+    // 4 assignment-based assessments (merged asuhan_keperawatan and analisa_sintesa)
+    const assignmentAssessments = [
+      { type: 'laporan_pendahuluan', label: 'Penilaian Laporan Pendahuluan', icon: FaFile, color: 'primary', requiresAssignment: true, assignmentType: 'laporan_pendahuluan' },
+      { type: 'asuhan_keperawatan', label: 'Penilaian Asuhan Keperawatan & Analisa Sintesa', icon: FaFile, color: 'info', requiresAssignment: true, assignmentType: 'asuhan_keperawatan' },
+      { type: 'telaah_artikel_jurnal', label: 'Telaah Artikel Jurnal', icon: FaBook, color: 'warning', requiresAssignment: true, assignmentType: 'artikel_jurnal' },
+      { type: 'case_report', label: 'Penilaian Case Report', icon: FaFile, color: 'danger', requiresAssignment: true, assignmentType: 'case_report' }
+    ];
+
+    return [...directAssessments, ...assignmentAssessments];
+  };
+
+  const navigateToAssessment = (student, assessmentType) => {
+    const params = new URLSearchParams({
+      studentId: student.user_id,
+      studentName: student.name
+    });
+    // For assignment-based assessments, find the relevant assignment
+    if (selectedAssessmentType && selectedAssessmentType.requiresAssignment) {
+      const relevantAssignment = assignments.find(a => a.assignment_type === selectedAssessmentType.assignmentType);
+      if (relevantAssignment) {
+        params.append('assignmentId', relevantAssignment.assignment_id);
+      }
+    }
+    // Navigate to the dedicated page for the assessment type
+    navigate(`/pages/assessments/${assessmentType}?${params.toString()}`);
+  };
+
   // Filter and paginate students
   const filteredStudents = students.filter(student => {
     const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          student.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = filterStatus === 'all' || 
-                         (filterStatus === 'submitted' && (student.has_submitted || student.has_assessment)) ||
-                         (filterStatus === 'not_submitted' && !student.has_submitted && !student.has_assessment);
-    return matchesSearch && matchesStatus;
+    return matchesSearch;
   });
 
   const indexOfLastStudent = currentPage * studentsPerPage;
@@ -263,6 +155,8 @@ const AssessmentPage = () => {
     );
   }
 
+  const assessmentTypes = getAssessmentTypes();
+
   return (
     <div className="container py-5">
       <div className="row">
@@ -272,9 +166,9 @@ const AssessmentPage = () => {
             <div>
               <h2 className="mb-1">
                 <FaGraduationCap className="me-2" />
-                Student Assessments
+                Daftar Penilaian Mahasiswa
               </h2>
-              <p className="text-muted mb-0">Grade student submissions and provide feedback</p>
+              <p className="text-muted mb-0">Pilih jenis penilaian dan lakukan penilaian terhadap mahasiswa</p>
             </div>
             <Button 
               variant="outline-secondary" 
@@ -282,441 +176,246 @@ const AssessmentPage = () => {
               className="d-flex align-items-center"
             >
               <FaArrowLeft className="me-2" />
-              Back
+              Kembali
             </Button>
           </div>
 
-          {/* Assessment Mode Selection */}
+          {/* Assessment Type Selection */}
           <Card className="mb-4">
             <Card.Header>
               <h5 className="mb-0">
-                <FaFilter className="me-2" />
-                Assessment Mode
+                <FaClipboardList className="me-2" />
+                Pilih Jenis Penilaian
               </h5>
             </Card.Header>
             <Card.Body>
-              <div className="row">
-                <div className="col-md-6">
-                  <Form.Group>
-                    <Form.Label>Assessment Mode</Form.Label>
-                    <Form.Select
-                      value={assessmentMode}
-                      onChange={(e) => {
-                        setAssessmentMode(e.target.value);
-                        setCurrentPage(1);
-                      }}
-                    >
-                      <option value="assignment">Assignment-based Assessment</option>
-                      <option value="direct">Direct Assessment (Assessment Types Only)</option>
-                    </Form.Select>
-                  </Form.Group>
-                </div>
-                <div className="col-md-6">
-                  {assessmentMode === 'assignment' ? (
-                    <Form.Group>
-                      <Form.Label>Select Assignment</Form.Label>
-                      <Form.Select 
-                        value={selectedAssignment?.assignment_id || ''} 
-                        onChange={(e) => {
-                          const assignment = assignments.find(a => a.assignment_id == e.target.value);
-                          setSelectedAssignment(assignment);
-                          setCurrentPage(1);
-                        }}
-                      >
-                        {assignments.length > 0 ? (
-                          assignments.map(assignment => (
-                            <option key={assignment.assignment_id} value={assignment.assignment_id}>
-                              {assignment.title} - Due: {new Date(assignment.due_date).toLocaleDateString()}
-                            </option>
-                          ))
-                        ) : (
-                          <option value="">No assignments available</option>
-                        )}
-                      </Form.Select>
-                    </Form.Group>
+              <Form.Group>
+                <Form.Label>Pilih Jenis Penilaian</Form.Label>
+                <Form.Select 
+                  value={selectedAssessmentType?.type || ''} 
+                  onChange={(e) => {
+                    const assessmentType = assessmentTypes.find(a => a.type === e.target.value);
+                    setSelectedAssessmentType(assessmentType);
+                    setCurrentPage(1);
+                  }}
+                >
+                  <option value="">Pilih jenis penilaian...</option>
+                  <optgroup label="Penilaian Langsung (Tidak Memerlukan Tugas)">
+                    {assessmentTypes.filter(a => !a.requiresAssignment).map(assessment => (
+                      <option key={assessment.type} value={assessment.type}>
+                        {assessment.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Penilaian Berbasis Tugas">
+                    {assessmentTypes.filter(a => a.requiresAssignment).map(assessment => (
+                      <option key={assessment.type} value={assessment.type}>
+                        {assessment.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                </Form.Select>
+                {selectedAssessmentType && (
+                  <Form.Text className="text-muted">
+                    {selectedAssessmentType.requiresAssignment 
+                      ? `Penilaian ini memerlukan mahasiswa untuk mengumpulkan tugas dengan tipe: ${selectedAssessmentType.assignmentType}`
+                      : 'Penilaian ini merupakan penilaian langsung yang tidak memerlukan pengumpulan tugas'
+                    }
+                  </Form.Text>
+                )}
+              </Form.Group>
+            </Card.Body>
+          </Card>
+
+          {/* Students List - Only show when assessment type is selected */}
+          {selectedAssessmentType && (
+            <>
+              {/* Search and Filter */}
+              <Card className="mb-4">
+                <Card.Body>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <Form.Group>
+                        <Form.Label>
+                          <FaSearch className="me-2" />
+                          Cari Mahasiswa
+                        </Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Cari berdasarkan nama atau email..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                      </Form.Group>
+                    </div>
+                    <div className="col-md-6">
+                      <Form.Group>
+                        <Form.Label>
+                          <FaFilter className="me-2" />
+                          Filter Berdasarkan Status
+                        </Form.Label>
+                        <Form.Select
+                          value={filterStatus}
+                          onChange={(e) => setFilterStatus(e.target.value)}
+                        >
+                          <option value="all">Semua Mahasiswa</option>
+                          <option value="assessed">Sudah Dinilai</option>
+                          <option value="not_assessed">Belum Dinilai</option>
+                        </Form.Select>
+                      </Form.Group>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+
+              {/* Students List */}
+              <Card>
+                <Card.Header>
+                  <h5 className="mb-0">
+                    <FaUserGraduate className="me-2" />
+                    Daftar Mahasiswa - {selectedAssessmentType.label}
+                  </h5>
+                </Card.Header>
+                <Card.Body>
+                  {currentStudents.length === 0 ? (
+                    <Alert variant="info">Tidak ada mahasiswa yang sesuai kriteria.</Alert>
                   ) : (
-                    <Form.Group>
-                      <Form.Label>Select Assessment Type</Form.Label>
-                      <Form.Select
-                        value={selectedAssessmentType || ''}
-                        onChange={(e) => {
-                          setSelectedAssessmentType(e.target.value);
-                          setCurrentPage(1);
-                        }}
-                      >
-                        {assessmentTypes.map(type => (
-                          <option key={type.value} value={type.value}>
-                            {type.label}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group>
-                  )}
-                </div>
-              </div>
-            </Card.Body>
-          </Card>
-
-          {selectedAssignment && assessmentMode === 'assignment' && (
-            <>
-              {/* Assignment Details */}
-              <Card className="mb-4">
-                <Card.Header>
-                  <h5 className="mb-0">{selectedAssignment.title}</h5>
-                </Card.Header>
-                <Card.Body>
-                  <div className="row">
-                    <div className="col-md-8">
-                      <p><strong>Description:</strong></p>
-                      <p>{selectedAssignment.description}</p>
-                    </div>
-                    <div className="col-md-4">
-                      <p><strong>Due Date:</strong></p>
-                      <p className="d-flex align-items-center">
-                        <FaCalendarAlt className="me-2" />
-                        {new Date(selectedAssignment.due_date).toLocaleString()}
-                      </p>
-                      <p><strong>Type:</strong> {selectedAssignment.assignment_type}</p>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </>
-          )}
-
-          {selectedAssessmentType && assessmentMode === 'direct' && (
-            <>
-              {/* Assessment Type Details */}
-              <Card className="mb-4">
-                <Card.Header>
-                  <h5 className="mb-0">{getAssessmentTypeLabel(selectedAssessmentType)}</h5>
-                </Card.Header>
-                <Card.Body>
-                  <div className="row">
-                    <div className="col-md-8">
-                      <p><strong>Assessment Type:</strong> {getAssessmentTypeLabel(selectedAssessmentType)}</p>
-                      <p><strong>Mode:</strong> Direct Assessment (No Assignment Required)</p>
-                      <p className="text-muted">
-                        This mode allows you to assess students directly based on their performance, 
-                        skills, or behavior without requiring them to submit assignment files.
-                      </p>
-                    </div>
-                    <div className="col-md-4">
-                      <Alert variant="info">
-                        <FaInfoCircle className="me-2" />
-                        <strong>Direct Assessment</strong><br />
-                        No submission files required. Assessment based on observation, 
-                        performance evaluation, or direct interaction.
-                      </Alert>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </>
-          )}
-
-          {/* Search and Filter */}
-          <Card className="mb-4">
-            <Card.Body>
-              <div className="row">
-                <div className="col-md-6">
-                  <Form.Group>
-                    <Form.Label>
-                      <FaSearch className="me-2" />
-                      Search Students
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Search by name or email..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                  </Form.Group>
-                </div>
-                <div className="col-md-6">
-                  <Form.Group>
-                    <Form.Label>
-                      <FaFilter className="me-2" />
-                      Filter by Status
-                    </Form.Label>
-                    <Form.Select
-                      value={filterStatus}
-                      onChange={(e) => setFilterStatus(e.target.value)}
-                    >
-                      <option value="all">All Students</option>
-                      {assessmentMode === 'assignment' ? (
-                        <>
-                          <option value="submitted">Submitted</option>
-                          <option value="not_submitted">Not Submitted</option>
-                        </>
-                      ) : (
-                        <>
-                          <option value="submitted">Assessed</option>
-                          <option value="not_submitted">Not Assessed</option>
-                        </>
-                      )}
-                    </Form.Select>
-                  </Form.Group>
-                </div>
-              </div>
-            </Card.Body>
-          </Card>
-
-          {/* Students List */}
-          <Card>
-            <Card.Header className="d-flex justify-content-between align-items-center">
-              <h5 className="mb-0">
-                <FaUserGraduate className="me-2" />
-                Students ({filteredStudents.length})
-              </h5>
-              <Badge bg="info">
-                Showing {indexOfFirstStudent + 1}-{Math.min(indexOfLastStudent, filteredStudents.length)} of {filteredStudents.length}
-              </Badge>
-            </Card.Header>
-            <Card.Body>
-              {currentStudents.length === 0 ? (
-                <Alert variant="info">No students found matching your criteria.</Alert>
-              ) : (
-                <div className="row">
-                  {currentStudents.map((student, index) => (
-                    <div key={student.user_id} className="col-12 mb-3">
-                      <Card className={
-                        assessmentMode === 'assignment' 
-                          ? (student.has_submitted ? 'border-success' : 'border-warning')
-                          : (student.has_assessment ? 'border-success' : 'border-warning')
-                      }>
-                        <Card.Body>
-                          <div className="row align-items-center">
-                            <div className="col-md-3">
-                              <h6 className="mb-1">{student.name}</h6>
-                              <small className="text-muted">{student.email}</small>
-                              <br />
-                              <small className="text-muted">{student.prodi}</small>
-                            </div>
-                            <div className="col-md-3">
-                              <div className="d-flex align-items-center">
-                                {assessmentMode === 'assignment' ? (
-                                  student.has_submitted ? (
-                                    <>
-                                      <FaCheckCircle className="text-success me-2" />
-                                      <span className="text-success">Submitted</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <FaTimesCircle className="text-warning me-2" />
-                                      <span className="text-warning">Not Submitted</span>
-                                    </>
-                                  )
-                                ) : (
-                                  student.has_assessment ? (
-                                    <>
-                                      <FaCheckCircle className="text-success me-2" />
-                                      <span className="text-success">Assessed</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <FaTimesCircle className="text-warning me-2" />
-                                      <span className="text-warning">Not Assessed</span>
-                                    </>
-                                  )
-                                )}
-                              </div>
-                              {assessmentMode === 'assignment' && student.submission && (
-                                <small className="text-muted">
-                                  {new Date(student.submission.submitted_at).toLocaleString()}
-                                </small>
-                              )}
-                              {assessmentMode === 'direct' && student.assessment && (
-                                <small className="text-muted">
-                                  {new Date(student.assessment.assessment_date).toLocaleString()}
-                                </small>
-                              )}
-                            </div>
-                            <div className="col-md-3">
-                              {student.assessment ? (
-                                <div>
-                                  <Badge bg={getScoreColor(student.assessment.score)}>
-                                    Score: {student.assessment.score}
-                                  </Badge>
-                                  <br />
-                                  <small className="text-muted">
-                                    {getAssessmentTypeLabel(student.assessment.assessment_type)}
-                                  </small>
+                    <div className="row">
+                      {currentStudents.map((student, index) => (
+                        <div key={student.user_id} className="col-md-6 col-lg-4 mb-3">
+                          <Card className="h-100">
+                            <Card.Body>
+                              <div className="d-flex align-items-center mb-3">
+                                <div className="flex-shrink-0">
+                                  <div className="bg-primary rounded-circle d-flex align-items-center justify-content-center" style={{ width: '40px', height: '40px' }}>
+                                    <FaUserGraduate className="text-white" />
+                                  </div>
                                 </div>
-                              ) : (
-                                <span className="text-muted">Not assessed</span>
-                              )}
-                            </div>
-                            <div className="col-md-3">
-                              <div className="d-flex gap-2">
-                                {(assessmentMode === 'assignment' && student.has_submitted) || 
-                                 (assessmentMode === 'direct') ? (
-                                  <>
-                                    <Button
-                                      variant="outline-primary"
-                                      size="sm"
-                                      onClick={() => openAssessmentModal(student)}
-                                    >
-                                      <FaEdit className="me-1" />
-                                      {student.assessment ? 'Edit' : 'Assess'}
-                                    </Button>
-                                    {assessmentMode === 'assignment' && student.submission && (
-                                      <Button
-                                        variant="outline-info"
-                                        size="sm"
-                                        onClick={() => window.open(`https://drive.google.com/file/d/${student.submission.google_drive_file_id}/view`, '_blank')}
-                                      >
-                                        <FaEye className="me-1" />
-                                        View File
-                                      </Button>
-                                    )}
-                                  </>
+                                <div className="flex-grow-1 ms-3">
+                                  <h6 className="mb-1">{student.name}</h6>
+                                  <small className="text-muted">{student.email}</small>
+                                </div>
+                              </div>
+                              
+                              <div className="mb-3">
+                                <Badge bg="secondary" className="me-2">
+                                  {student.prodi}
+                                </Badge>
+                                <Badge bg="info">
+                                  {student.user_id}
+                                </Badge>
+                              </div>
+
+                              <div className="d-grid">
+                                {student.assessment ? (
+                                  <Badge bg="success" className="fs-6 py-2 px-3">
+                                    Skor: {student.assessment.score ?? 'N/A'}
+                                  </Badge>
                                 ) : (
                                   <Button
-                                    variant="outline-secondary"
+                                    variant="primary"
                                     size="sm"
-                                    disabled
+                                    onClick={() => navigateToAssessment(student, selectedAssessmentType.type)}
+                                    className="d-flex align-items-center justify-content-center"
                                   >
-                                    {assessmentMode === 'assignment' ? 'No Submission' : 'No Assessment'}
+                                    <FaStar className="me-2" />
+                                    Nilai Mahasiswa
                                   </Button>
                                 )}
                               </div>
-                            </div>
-                          </div>
-                        </Card.Body>
-                      </Card>
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
+                  )}
 
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="d-flex justify-content-center mt-4">
-                  <Pagination>
-                    <Pagination.First 
-                      onClick={() => setCurrentPage(1)}
-                      disabled={currentPage === 1}
-                    />
-                    <Pagination.Prev 
-                      onClick={() => setCurrentPage(currentPage - 1)}
-                      disabled={currentPage === 1}
-                    />
-                    
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                      <Pagination.Item
-                        key={page}
-                        active={page === currentPage}
-                        onClick={() => setCurrentPage(page)}
-                      >
-                        {page}
-                      </Pagination.Item>
-                    ))}
-                    
-                    <Pagination.Next 
-                      onClick={() => setCurrentPage(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                    />
-                    <Pagination.Last 
-                      onClick={() => setCurrentPage(totalPages)}
-                      disabled={currentPage === totalPages}
-                    />
-                  </Pagination>
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="d-flex justify-content-center mt-4">
+                      <Pagination>
+                        <Pagination.First 
+                          onClick={() => setCurrentPage(1)}
+                          disabled={currentPage === 1}
+                        />
+                        <Pagination.Prev 
+                          onClick={() => setCurrentPage(currentPage - 1)}
+                          disabled={currentPage === 1}
+                        />
+                        
+                        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                          const page = Math.max(1, Math.min(totalPages - 4, currentPage - 2)) + i;
+                          return (
+                            <Pagination.Item
+                              key={page}
+                              active={page === currentPage}
+                              onClick={() => setCurrentPage(page)}
+                            >
+                              {page}
+                            </Pagination.Item>
+                          );
+                        })}
+                        
+                        <Pagination.Next 
+                          onClick={() => setCurrentPage(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                        />
+                        <Pagination.Last 
+                          onClick={() => setCurrentPage(totalPages)}
+                          disabled={currentPage === totalPages}
+                        />
+                      </Pagination>
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </>
+          )}
+
+          {/* Instructions */}
+          {!selectedAssessmentType && (
+            <Card className="border-info">
+              <Card.Header className="bg-info text-white">
+                <h5 className="mb-0">
+                  <FaInfoCircle className="me-2" />
+                  Petunjuk
+                </h5>
+              </Card.Header>
+              <Card.Body>
+                <div className="row">
+                  <div className="col-md-6">
+                    <h6>Penilaian Langsung</h6>
+                    <p className="text-muted">
+                      Penilaian ini dapat dilakukan tanpa mahasiswa mengumpulkan tugas. 
+                      Dasar penilaiannya berdasarkan pengamatan dan evaluasi langsung.
+                    </p>
+                    <ul className="text-muted">
+                      <li>Penilaian Pre Conference</li>
+                      <li>Penilaian Post Conference</li>
+                      <li>Penilaian Sikap Mahasiswa</li>
+                      <li>Keterampilan Prosedural Klinik DOPS</li>
+                      <li>Penilaian Ujian Klinik</li>
+                    </ul>
+                  </div>
+                  <div className="col-md-6">
+                    <h6>Penilaian Berbasis Tugas</h6>
+                    <p className="text-muted">
+                      Penilaian ini memerlukan mahasiswa untuk mengumpulkan tugas terlebih dahulu. 
+                      Penilaian masih dapat dilakukan meskipun tugas belum dikumpulkan.
+                    </p>
+                    <ul className="text-muted">
+                      <li>Penilaian Laporan Pendahuluan</li>
+                      <li>Penilaian Asuhan Keperawatan & Analisa Sintesa</li>
+                      <li>Telaah Artikel Jurnal</li>
+                      <li>Penilaian Case Report</li>
+                    </ul>
+                  </div>
                 </div>
-              )}
-            </Card.Body>
-          </Card>
+              </Card.Body>
+            </Card>
+          )}
         </div>
       </div>
-
-      {/* Assessment Modal */}
-      <Modal show={showAssessmentModal} onHide={() => setShowAssessmentModal(false)} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <FaStar className="me-2" />
-            {selectedStudent?.assessment ? 'Edit Assessment' : 'Create Assessment'}
-          </Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleAssessmentSubmit}>
-          <Modal.Body>
-            {selectedStudent && (
-              <div className="mb-3">
-                <h6>Student: {selectedStudent.name}</h6>
-                <p className="text-muted mb-0">{selectedStudent.email}</p>
-              </div>
-            )}
-            
-            <Form.Group className="mb-3">
-              <Form.Label>Assessment Type</Form.Label>
-              <Form.Select
-                value={assessmentForm.assessment_type}
-                onChange={(e) => setAssessmentForm({...assessmentForm, assessment_type: e.target.value})}
-                required
-              >
-                {assessmentTypes.map(type => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Score (0-100)</Form.Label>
-              <Form.Control
-                type="number"
-                min="0"
-                max="100"
-                value={assessmentForm.score}
-                onChange={(e) => setAssessmentForm({...assessmentForm, score: e.target.value})}
-                required
-                placeholder="Enter score (0-100)"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Comments</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={4}
-                value={assessmentForm.comments}
-                onChange={(e) => setAssessmentForm({...assessmentForm, comments: e.target.value})}
-                placeholder="Provide detailed feedback and comments..."
-              />
-            </Form.Group>
-
-            {assessmentMode === 'assignment' && selectedStudent?.submission && (
-              <Alert variant="info">
-                <FaFileAlt className="me-2" />
-                <strong>Submission File:</strong> 
-                <Button
-                  variant="link"
-                  className="p-0 ms-2"
-                  onClick={() => window.open(`https://drive.google.com/file/d/${selectedStudent.submission.google_drive_file_id}/view`, '_blank')}
-                >
-                  View in Google Drive
-                </Button>
-              </Alert>
-            )}
-
-            {assessmentMode === 'direct' && (
-              <Alert variant="warning">
-                <FaInfoCircle className="me-2" />
-                <strong>Direct Assessment:</strong> This assessment will be created without requiring a submission file.
-              </Alert>
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowAssessmentModal(false)}>
-              Cancel
-            </Button>
-            <Button variant="primary" type="submit">
-              <FaSave className="me-1" />
-              {selectedStudent?.assessment ? 'Update Assessment' : 'Save Assessment'}
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
     </div>
   );
 };
